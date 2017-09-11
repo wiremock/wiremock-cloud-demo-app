@@ -9,7 +9,7 @@
         body {
             font-family: "Cairo", sans-serif;
         }
-        
+
         h1 {
             text-align: center;
         }
@@ -37,27 +37,61 @@
             padding: 5px;
             margin: 0;
         }
+
+        label {
+            display: block;
+        }
+
+        #new-item-form {
+            margin-top: 2rem;
+        }
+
+        #new-item-description-field {
+            width: 70%;
+            height: 1.5rem;
+
+        }
+
+        #new-item-description-field {
+            width: 70%;
+            height: 1.5rem;
+            padding: 0.5rem;
+            border: 1px solid #D1D5DA;
+            border-radius: 5px;
+        }
+
+        #submit-new-item-button {
+            color: #fff;
+            background: #036334;
+            border: none;
+            border-radius: 5px;
+            padding: 0.9rem;
+            margin-left: 0.5rem;
+        }
     </style>
+
 </head>
 
 <body>
-    <div class="content">
-        <h1>To Do List</h1>
+<div class="content">
+    <h1>To Do List</h1>
 
-        {{name}}
+    <table class="todo-list">
+        <tbody>
+        {{#items}}
+        <tr>
+            <td>{{this.description}}</td>
+        </tr>
+        {{/items}}
+        </tbody>
+    </table>
 
-        <table class="todo-list">
-            <tbody>
-                <tr>
-                    <td>Item 1</td>
-                    <td class="pull-right"><a href="#">Delete</a></td>
-                </tr>
-                <tr>
-                    <td>Item 2</td>
-                    <td class="pull-right"><a href="#">Delete</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+
+    <form id="new-item-form" method="post" action="/todo-items">
+        <label id="new-item-description-label" for="new-item-description-field">Description</label>
+        <input id="new-item-description-field" type="text" name="description" />
+        <input id="submit-new-item-button" type="submit" value="Add to do item"/>
+    </form>
+</div>
 </body>
 </html>
