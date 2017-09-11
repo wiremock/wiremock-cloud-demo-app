@@ -97,18 +97,18 @@
         <tbody>
         {{#items}}
         <tr>
-            <td>{{this.description}}</td>
+            <td class="todo-item">{{this.description}}</td>
         </tr>
         {{/items}}
         </tbody>
     </table>
 
 
-    <form id="new-item-form" method="post" action="/todo-items">
+    <form id="new-item-form" name="new-item-form" method="post" action="/todo-items">
         <label id="new-item-description-label" for="new-item-description-field">Description</label>
         <input id="new-item-description-field" type="text" name="description" />
 
-        <input id="submit-new-item-button" type="submit" value="Add to do item"/>
+        <input id="submit-new-item-button" name="add" type="submit" value="Add to do item"/>
     </form>
 </div>
 </body>
