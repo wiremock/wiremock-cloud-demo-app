@@ -80,19 +80,4 @@ public class ToDoWebTest {
         mockToDoApi.verifyThat(postRequestedFor(urlPathEqualTo("/todo-items"))
                 .withRequestBody(equalToJson(EXPECTED_NEW_ITEM_JSON)));
     }
-
-    @Ignore
-    @Test
-    public void shows_error_page_when_server_returns_a_503_response() throws Exception {
-        mockToDoApi.register(post("/todo-items")
-                .willReturn(serviceUnavailable()));
-
-        webDriver.get("/");
-        webDriver.findElement(By.name("description")).sendKeys("My very urgent thing");
-        webDriver.findElement(By.name("add")).click();
-
-        assertThat(webDriver.getCurrentUrl()).contains("/error");
-        assertThat(webDriver.getPageSource()).contains("503 service unavailable");
-    }
-
 }
