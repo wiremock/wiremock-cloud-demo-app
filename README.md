@@ -14,13 +14,13 @@ Provided you have Java installed and on the `PATH`, the app can be run from the 
 Windows:
 
 ```
-> gradlew bootRun
+gradlew bootRun
 ```
 
 Linux or Mac OSX:
 
 ```
-$ ./gradlew bootRun
+./gradlew bootRun
 ```
 
 The app will start on port 9000 (which can be changed in `application.properties`). Once it is running, point your browser to [http://localhost:9000](http://localhost:9000).
@@ -31,12 +31,12 @@ The app will start on port 9000 (which can be changed in `application.properties
 Windows:
 
 ```
-> gradlew test
+gradlew test
 ```
 
 Linux or Mac OSX:
 
 ```
-$ ./gradlew test
+./gradlew test
 ```
 
