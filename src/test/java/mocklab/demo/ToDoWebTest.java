@@ -1,6 +1,7 @@
 package mocklab.demo;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -29,6 +30,12 @@ public class ToDoWebTest {
     @Before
     public void init() {
         mockToDoApi = new WireMock("example.mocklab.io", 80); // Change the hostname to point to your mock API (see the Settings page in the MockLab UI)
+        reset();
+    }
+
+    @After
+    public void reset() {
+        mockToDoApi.resetToDefaultMappings();
     }
 
     private static final String OK_JSON = "{\n" +

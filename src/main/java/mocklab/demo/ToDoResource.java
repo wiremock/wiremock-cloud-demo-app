@@ -1,7 +1,10 @@
 package mocklab.demo;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +24,10 @@ public class ToDoResource {
     private String baseUrl;
 
     public ToDoResource() {
-        restTemplate = new RestTemplate();
+        HttpClient httpClient = HttpClientBuilder.create()
+                .setUserAgent("mocklab-demo-app-1")
+                .build();
+        restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(httpClient));
     }
 
     @GetMapping("/")
