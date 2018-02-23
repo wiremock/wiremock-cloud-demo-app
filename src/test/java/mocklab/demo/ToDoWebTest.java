@@ -3,39 +3,51 @@ package mocklab.demo;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.net.URI;
 import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ToDoResource.class)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
+        classes = MockLabDemoConfiguration.class)
 public class ToDoWebTest {
 
-    @Autowired
+    static final String APP_BASE_URL = "http://localhost:9000";
+
+    @Value("${mockapi.baseurl}")
+    private String mockApiBaseUrl;
+
     private WebDriver webDriver;
 
     private WireMock mockToDoApi;
 
     @Before
     public void init() {
-        mockToDoApi = new WireMock("example.mocklab.io", 80); // Change the hostname to point to your mock API (see the Settings page in the MockLab UI)
+        mockToDoApi = new WireMock(URI.create(mockApiBaseUrl).getHost(), 80); // Change the hostname to point to your mock API (see the Settings page in the MockLab UI)
         reset();
+
+        webDriver = new ChromeDriver();
     }
 
     @After
     public void reset() {
         mockToDoApi.resetToDefaultMappings();
+        if (webDriver != null) {
+            webDriver.close();
+        }
     }
 
     private static final String OK_JSON = "{\n" +
@@ -63,7 +75,7 @@ public class ToDoWebTest {
     public void shows_to_to_list_items_returned_from_the_api() {
         mockToDoApi.register(get("/todo-items").willReturn(okJson(OK_JSON)));
 
-        webDriver.get("/");
+        webDriver.get(APP_BASE_URL + "/");
         List<WebElement> toDoItems = webDriver.findElements(By.className("todo-item"));
 
         assertThat(toDoItems.get(0).getText()).contains("First item description");
@@ -75,10 +87,11 @@ public class ToDoWebTest {
 
     @Test
     public void shows_response_message_when_new_item_successfully_submitted() throws Exception {
+        mockToDoApi.register(get("/todo-items").willReturn(okJson(OK_JSON)));
         mockToDoApi.register(post("/todo-items")
                 .willReturn(okJson(OK_POST_RESPONSE_JSON)));
 
-        webDriver.get("/");
+        webDriver.get(APP_BASE_URL + "/");
         webDriver.findElement(By.name("description")).sendKeys("My very urgent thing");
         webDriver.findElement(By.name("add")).click();
         String message = webDriver.findElement(By.id("message")).getText();
@@ -86,5 +99,9 @@ public class ToDoWebTest {
         assertThat(message).contains("Successfully added an item");
         mockToDoApi.verifyThat(postRequestedFor(urlPathEqualTo("/todo-items"))
                 .withRequestBody(equalToJson(EXPECTED_NEW_ITEM_JSON)));
+    }
+
+    static {
+        System.setProperty("webdriver.chrome.driver", "lib/chromedriver");
     }
 }

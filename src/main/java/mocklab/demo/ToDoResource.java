@@ -20,6 +20,9 @@ public class ToDoResource {
 
     private final RestTemplate restTemplate;
 
+    @Value("${backend.http.read-timeout}")
+    private int readTimeoutMilliseconds;
+
     @Value("${mockapi.baseurl}")
     private String baseUrl;
 
@@ -27,7 +30,10 @@ public class ToDoResource {
         HttpClient httpClient = HttpClientBuilder.create()
                 .setUserAgent("mocklab-demo-app-1")
                 .build();
-        restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory(httpClient));
+
+        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
+        requestFactory.setReadTimeout(readTimeoutMilliseconds);
+        restTemplate = new RestTemplate(requestFactory);
     }
 
     @GetMapping("/")
