@@ -73,11 +73,14 @@ public class ToDoWebTest {
 
     @Test
     public void shows_to_to_list_items_returned_from_the_api() {
+        // Given
         mockToDoApi.register(get("/todo-items").willReturn(okJson(OK_JSON)));
 
+        // When
         webDriver.get(APP_BASE_URL + "/");
         List<WebElement> toDoItems = webDriver.findElements(By.className("todo-item"));
 
+        // Then
         assertThat(toDoItems.get(0).getText()).contains("First item description");
         assertThat(toDoItems.get(2).getText()).contains("Third thing");
     }
@@ -87,18 +90,27 @@ public class ToDoWebTest {
 
     @Test
     public void shows_response_message_when_new_item_successfully_submitted() throws Exception {
+        // Given
         mockToDoApi.register(get("/todo-items").willReturn(okJson(OK_JSON)));
         mockToDoApi.register(post("/todo-items")
                 .willReturn(okJson(OK_POST_RESPONSE_JSON)));
 
+        // When
         webDriver.get(APP_BASE_URL + "/");
+        Thread.sleep(3000);
         webDriver.findElement(By.name("description")).sendKeys("My very urgent thing");
+        Thread.sleep(2000);
         webDriver.findElement(By.name("add")).click();
         String message = webDriver.findElement(By.id("message")).getText();
 
-        assertThat(message).contains("Successfully added an item");
+
+        // Then
+        assertThat(message).isEqualTo("Successfully added an item");
         mockToDoApi.verifyThat(postRequestedFor(urlPathEqualTo("/todo-items"))
                 .withRequestBody(equalToJson(EXPECTED_NEW_ITEM_JSON)));
+
+
+        Thread.sleep(2000);
     }
 
     static {
