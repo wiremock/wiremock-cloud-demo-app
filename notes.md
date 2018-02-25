@@ -32,4 +32,5 @@ Ensure Content-Type = application/json
 }
 ```
 
-Delete all stubs then automation demo
+Stop the running app!
+Delete fault stub then automation demo

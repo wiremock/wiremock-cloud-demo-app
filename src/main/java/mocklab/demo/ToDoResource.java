@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.PostConstruct;
 import java.net.URI;
 import java.util.Map;
 
 @Controller
 public class ToDoResource {
 
-    private final RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
     @Value("${backend.http.read-timeout}")
     private int readTimeoutMilliseconds;
@@ -26,11 +27,11 @@ public class ToDoResource {
     @Value("${mockapi.baseurl}")
     private String baseUrl;
 
-    public ToDoResource() {
+    @PostConstruct
+    public void init() {
         HttpClient httpClient = HttpClientBuilder.create()
                 .setUserAgent("mocklab-demo-app-1")
                 .build();
-
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
         requestFactory.setReadTimeout(readTimeoutMilliseconds);
         restTemplate = new RestTemplate(requestFactory);
