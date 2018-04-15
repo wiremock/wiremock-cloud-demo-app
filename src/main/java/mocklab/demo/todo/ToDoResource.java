@@ -1,5 +1,6 @@
-package mocklab.demo;
+package mocklab.demo.todo;
 
+import mocklab.demo.ResponseMessage;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Value;

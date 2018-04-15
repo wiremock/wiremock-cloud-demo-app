@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+    <title>MockLab - Paypal Checkout Demo</title>
+    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
+    <script src="/assets/jquery-3.2.1.js"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <style type="text/css">
+        body {
+            font-family: "Cairo", sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .content {
+            min-width: 320px;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #paypal-button {
+            text-align: center;
+        }
+
+        #message {
+            padding: 5px;
+            border: 1px solid green;
+            margin-bottom: 2rem;
+            color: green;
+        }
+
+        .message--hidden {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="content">
+    <h1>Paypal Checkout</h1>
+
+
+    <div id="message" class="message--hidden">
+    </div>
+
+
+    <div id="paypal-button"></div>
+
+    <script>
+        var CREATE_PAYMENT_URL  = '/paypal/create-payment';
+        var EXECUTE_PAYMENT_URL = '/paypal/execute-payment';
+
+        function showMessage(message) {
+            $('#message')
+                .text(message)
+                .removeClass('message--hidden');
+
+            window.setTimeout(function() {
+                $('#message')
+                    .text('')
+                    .addClass('message--hidden');
+            }, 10000);
+        }
+
+        paypal.Button.render({
+            env: 'sandbox', // Or 'production',
+
+            commit: true, // Show a 'Pay Now' button
+
+            client: {
+                sandbox:    'AX7GYdURLc6DOP8d4FZmC8Chduox_EdfVmn_OsoAcgc-FrnrSYD2EFHZebApvq5yQszXc4NhzdXunAD4',
+                production: 'xxxxxxxxx'
+            },
+
+            style: {
+                color: 'gold',
+                size: 'small'
+            },
+
+            payment: function(data, actions) {
+                return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+                    console.log(JSON.stringify(data));
+                    return data.id;
+                });
+            },
+
+            onAuthorize: function(data, actions) {
+                return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                    paymentID: data.paymentID,
+                    payerID:   data.payerID
+                }).then(function(data) {
+                    showMessage("Successfully paid " + JSON.stringify(data));
+                });
+            },
+
+            onCancel: function(data, actions) {
+                /*
+                 * Buyer cancelled the payment
+                 */
+            },
+
+            onError: function(err) {
+                var message = JSON.stringify(err);
+                showMessage(message);
+                console.log(message);
+                /*
+                 * An error occurred during the transaction
+                 */
+            }
+        }, '#paypal-button');
+    </script>
+
+</div>
+</body>
+</html>

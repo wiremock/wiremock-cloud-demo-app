@@ -1,4 +1,4 @@
-package mocklab.demo;
+package mocklab.demo.todo;
 
 public class NewToDoItemForm {
 

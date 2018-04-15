@@ -28,6 +28,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-mustache")
     compile('org.apache.httpcomponents:httpclient:4.5.3')
+    compile 'com.paypal.sdk:rest-api-sdk:+'
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.seleniumhq.selenium:selenium-api")
