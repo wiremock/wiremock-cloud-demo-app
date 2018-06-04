@@ -23,6 +23,7 @@ import java.util.Map;
 public class PaypalResource {
 
     private static final String PAYPAL_ENDPOINT = "https://paypal-demo.mocklab.io/";
+//    private static final String PAYPAL_ENDPOINT = "https://api.sandbox.paypal.com/";
 
     private APIContext paypalApiContext;
 
@@ -47,6 +48,7 @@ public class PaypalResource {
         requestFactory.setReadTimeout(readTimeoutMilliseconds);
 
         Map<String, String> paypalConfig = new HashMap<>();
+
         paypalConfig.put(Constants.ENDPOINT, PAYPAL_ENDPOINT);
         paypalApiContext = new APIContext(
                 paypalClientId,
