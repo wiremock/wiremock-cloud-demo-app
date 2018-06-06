@@ -22,16 +22,13 @@ import java.util.Map;
 @Controller
 public class PaypalResource {
 
-    private static final String PAYPAL_ENDPOINT = "https://paypal-demo.mocklab.io/";
-//    private static final String PAYPAL_ENDPOINT = "https://api.sandbox.paypal.com/";
-
     private APIContext paypalApiContext;
 
     @Value("${backend.http.read-timeout}")
     private int readTimeoutMilliseconds;
 
-    @Value("${mockapi.baseurl}")
-    private String baseUrl;
+    @Value("${paypal.endpoint}")
+    private String paypalEndpoint;
 
     @Value("${paypal.client.id}")
     private String paypalClientId;
@@ -49,7 +46,7 @@ public class PaypalResource {
 
         Map<String, String> paypalConfig = new HashMap<>();
 
-        paypalConfig.put(Constants.ENDPOINT, PAYPAL_ENDPOINT);
+        paypalConfig.put(Constants.ENDPOINT, paypalEndpoint);
         paypalApiContext = new APIContext(
                 paypalClientId,
                 paypalClientSecret,
@@ -64,8 +61,8 @@ public class PaypalResource {
     }
 
     @PostMapping("/paypal/create-payment")
-    public ResponseEntity<Map<String, Object>> createPayment(Map<String, Object> form) throws Exception {
-        Payment payment = createPayment();
+    public ResponseEntity<Map<String, Object>> createPayment(@ModelAttribute CreatePaymentRequest form) throws Exception {
+        Payment payment = buildPayment(form.getAmount());
         payment = payment.create(paypalApiContext);
 
         Map<String, Object> data = new HashMap<>();
@@ -90,10 +87,10 @@ public class PaypalResource {
         );
     }
 
-    private Payment createPayment() {
+    private Payment buildPayment(String amountValue) {
         Amount amount = new Amount();
         amount.setCurrency("GBP");
-        amount.setTotal("123.45");
+        amount.setTotal(amountValue);
 
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);

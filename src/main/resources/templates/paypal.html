@@ -37,6 +37,23 @@
         .message--hidden {
             display: none;
         }
+
+        #amount-form {
+            display: block;
+            width: 150px;
+            margin: auto;
+
+            margin-bottom: 1rem;
+        }
+
+        #amount-form #amount {
+            height: 1.5rem;
+            width: 95%;
+
+            font-size: 1rem;
+        }
+
+
     </style>
 
 </head>
@@ -49,6 +66,10 @@
     <div id="message" class="message--hidden">
     </div>
 
+    <form id="amount-form">
+        <label for="amount" style="display: block">Pay me this much:</label>
+        <input id="amount" type="text" name="amount"/>
+    </form>
 
     <div id="paypal-button"></div>
 
@@ -65,6 +86,7 @@
                 $('#message')
                     .text('')
                     .addClass('message--hidden');
+                $('#amount')[0].value = '';
             }, 10000);
         }
 
@@ -84,7 +106,8 @@
             },
 
             payment: function(data, actions) {
-                return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
+                var amount = window.parent.document.getElementById('amount').value;
+                return paypal.request.post(CREATE_PAYMENT_URL, { amount: amount }).then(function(data) {
                     console.log(JSON.stringify(data));
                     return data.id;
                 });

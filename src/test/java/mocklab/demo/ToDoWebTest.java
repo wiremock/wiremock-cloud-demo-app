@@ -97,9 +97,11 @@ public class ToDoWebTest {
 
         // When
         webDriver.get(APP_BASE_URL + "/");
-        Thread.sleep(3000);
+        Thread.sleep(3000); // Slow things down for demo purposes
+
         webDriver.findElement(By.name("description")).sendKeys("My very urgent thing");
-        Thread.sleep(2000);
+        Thread.sleep(2000); // Slow things down for demo purposes
+
         webDriver.findElement(By.name("add")).click();
         String message = webDriver.findElement(By.id("message")).getText();
 
