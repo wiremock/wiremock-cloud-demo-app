@@ -1,34 +1,35 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE")
-    }
+import mocklab.build.GithubReleasePublishTask
+import mocklab.build.HerokuFatJarDeployTask
+
+plugins {
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id "net.foragerr.jmeter" version "1.1.0-4.0"
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-
-jar {
-    baseName = 'mocklab-demo-app'
-    version =  '0.1.0'
-}
-
+group = 'io.mocklab'
+version =  '1'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "Hoxton.SR1")
+}
+
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-mustache")
-    compile('org.apache.httpcomponents:httpclient:4.5.3')
+    compile 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+//    compile 'org.springframework.boot:spring-boot-starter-webflux'
+    compile 'org.springframework.boot:spring-boot-starter-mustache'
+    compile 'org.apache.httpcomponents:httpclient:4.5.11'
     compile 'com.paypal.sdk:rest-api-sdk:+'
+    compile "com.google.guava:guava:28.2-jre"
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.seleniumhq.selenium:selenium-api")
@@ -38,3 +39,43 @@ dependencies {
     testCompile('org.assertj:assertj-core:3.8.0')
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+bootJar {
+    archiveName = 'mocklab-demo-app.jar'
+}
+
+
+def tag = System.getenv('CIRCLE_SHA1') ? "circle-${System.getenv('CIRCLE_BRANCH')}-${System.getenv('CIRCLE_SHA1')}" :
+    (System.getenv('TAG') ?: "${InetAddress.localHost.hostName}-${System.currentTimeMillis()}")
+
+def REPO_NAME = 'mocklab-demo-app'
+
+task pushToGithub(type: GithubReleasePublishTask) {
+    repoOwner 'mocklab'
+    repository REPO_NAME
+    tagName tag
+    attachmentFilePath "${project.buildDir}/libs/mocklab-demo-app.jar"
+}
+
+task herokuDeploy(type: HerokuFatJarDeployTask) {
+    repoOwner 'mocklab'
+    repository REPO_NAME
+    tagName tag
+    herokuApp "mocklab-demo"
+}
+
+herokuDeploy.doFirst {
+    assert System.getenv('APP_ENV'), 'You must supply APP_ENV as an environment variable'
+}
+
+task buildAndDeploy {
+    dependsOn clean, herokuDeploy, pushToGithub
+}
+
+pushToGithub.mustRunAfter assemble
+herokuDeploy.mustRunAfter pushToGithub

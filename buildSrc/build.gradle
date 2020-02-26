@@ -1,0 +1,13 @@
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.kohsuke:github-api:1.75'
+}

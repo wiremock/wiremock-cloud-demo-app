@@ -47,6 +47,8 @@ public class PaypalResource {
         Map<String, String> paypalConfig = new HashMap<>();
 
         paypalConfig.put(Constants.ENDPOINT, paypalEndpoint);
+        paypalConfig.put(Constants.HTTP_CONNECTION_READ_TIMEOUT, String.valueOf(readTimeoutMilliseconds));
+
         paypalApiContext = new APIContext(
                 paypalClientId,
                 paypalClientSecret,

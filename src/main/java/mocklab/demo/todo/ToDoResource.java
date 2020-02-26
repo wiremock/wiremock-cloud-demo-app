@@ -38,12 +38,12 @@ public class ToDoResource {
         restTemplate = new RestTemplate(requestFactory);
     }
 
-    @GetMapping("/")
+    @GetMapping("/todo")
     public String indexPage(Map<String, Object> model) {
         ToDoList toDoList = restTemplate.getForObject(URI.create(baseUrl + "/todo-items"), ToDoList.class);
         model.put("items", toDoList.getItems());
         model.put("has_message", model.containsKey("message"));
-        return "index";
+        return "todo";
     }
 
     @PostMapping("/todo-items")
@@ -51,13 +51,13 @@ public class ToDoResource {
         ToDoItem newItem = new ToDoItem(null, form.getDescription());
         ResponseEntity<ResponseMessage> response = restTemplate.postForEntity(baseUrl + "/todo-items", newItem, ResponseMessage.class);
         redirectAttrs.addFlashAttribute("message", response.getBody().getMessage());
-        return "redirect:/";
+        return "redirect:/todo";
     }
 
     @PostMapping("/todo-items/{id}/delete")
     public String deleteItem(@PathVariable String id) {
         restTemplate.delete(baseUrl + "/todo-items/{id}", id);
-        return "redirect:/";
+        return "redirect:/todo";
     }
 
 

@@ -1,0 +1,41 @@
+spring.main.allow-bean-definition-overriding: true
+
+server.port: 9000
+management.port: 9001
+
+spring:
+    security:
+        oauth2:
+            client:
+                provider:
+                    mocklab:
+                        authorization-uri: https://openid-connect.mocklab.io/oauth/authorize
+                        token-uri: https://openid-connect.mocklab.io/oauth/token
+                        user-info-uri: https://openid-connect.mocklab.io/userinfo
+                        user-name-attribute: sub
+                        jwk-set-uri: https://openid-connect.mocklab.io/.well-known/jwks.json
+
+                registration:
+                    mocklab:
+                        authorization-grant-type: authorization_code
+#                        scope: openid, profile, email
+                        scope: email
+                        redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+                        clientId: mocklab_demo_123
+                        clientSecret: whatever
+
+spring.mustache.expose-request-attributes: true
+
+mockapi.baseurl: http://live-demo.mocklab.io
+backend.http.read-timeout: 30000
+
+paypal.endpoint: https://paypal-demo.mocklab.io/
+#paypal.endpoint: https://api.sandbox.paypal.com/
+
+paypal.client.id: AX7GYdURLc6DOP8d4FZmC8Chduox_EdfVmn_OsoAcgc-FrnrSYD2EFHZebApvq5yQszXc4NhzdXunAD4
+paypal.client.secret: xxx
+
+logging:
+    level:
+        org:
+            springframework: DEBUG

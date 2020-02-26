@@ -22,7 +22,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
-        classes = MockLabDemoConfiguration.class)
+        classes = MockLabDemoApp.class)
 public class ToDoWebTest {
 
     static final String APP_BASE_URL = "http://localhost:9000";
@@ -74,7 +74,9 @@ public class ToDoWebTest {
     @Test
     public void shows_to_to_list_items_returned_from_the_api() {
         // Given
-        mockToDoApi.register(get("/todo-items").willReturn(okJson(OK_JSON)));
+        mockToDoApi.register(get("/todo-items")
+                .persistent()
+                .willReturn(okJson(OK_JSON)));
 
         // When
         webDriver.get(APP_BASE_URL + "/");
