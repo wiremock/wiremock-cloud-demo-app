@@ -14,6 +14,11 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
+p {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
 a {
     color: #40904D;
 }
@@ -102,4 +107,30 @@ nav ul li, nav ol li {
     animation: intro 0.3s both;
     animation-delay: 0.35s;
     min-height: 1024px;
+}
+
+.login-start-button {
+    border: 1px solid #c1c1c1;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    display: inline;
+    width: 30em;
+    vertical-align: center;
+}
+
+.login-start-button img {
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: text-top;
+}
+
+.logout-button {
+    background-color: transparent;
+    font-family: Cairo,sans-serif;
+    font-size: 1em;
+    color: #40904D;
+    border: none;
+    cursor: pointer;
 }

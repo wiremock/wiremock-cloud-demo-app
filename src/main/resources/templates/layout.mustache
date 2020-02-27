@@ -12,9 +12,16 @@
     <nav class="header-nav sticky">
         <ul class="header-nav__container">
             <li class="header-nav__logo">
-                <a href="https://get.mocklab.io">
+                <a href="/">
                     <img src="/images/mocklab_logo_with_text.png" title="MockLab logo">
                 </a>
+            </li>
+
+            <li class="header-nav__item header-nav__item--last">
+                <form method="post" action="/logout">
+                    <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}"/>
+                    <input type="submit" value="Logout" class="logout-button"/>
+                </form>
             </li>
 
             <li class="header-nav__cta">

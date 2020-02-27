@@ -10,3 +10,4 @@ out/
 build/
 
 *.i*
+**/.DS_Store
