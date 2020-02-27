@@ -1,9 +1,7 @@
-<h1>User info</h1>
+{{#layout}}
+<h1 style="font-weight: normal">Hello <strong>{{user.email}}</strong>!</h1>
 
-<dl>
-    <dt>ID:</dt>
-    <dd>{{user.id}}</dd>
-
-    <dt>Email:</dt>
-    <dd>{{user.email}}</dd>
-</dl>
+<p>
+    Your user ID is: <code>{{user.id}}</code>
+</p>
+{{/layout}}

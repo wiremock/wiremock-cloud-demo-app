@@ -25,8 +25,8 @@ ext {
 dependencies {
     compile 'org.springframework.boot:spring-boot-starter-oauth2-client'
     compile 'org.springframework.boot:spring-boot-starter-web'
-//    compile 'org.springframework.boot:spring-boot-starter-webflux'
     compile 'org.springframework.boot:spring-boot-starter-mustache'
+    compile "org.springframework.boot:spring-boot-devtools"
     compile 'org.apache.httpcomponents:httpclient:4.5.11'
     compile 'com.paypal.sdk:rest-api-sdk:+'
     compile "com.google.guava:guava:28.2-jre"

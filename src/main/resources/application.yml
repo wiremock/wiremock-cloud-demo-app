@@ -16,12 +16,20 @@ spring:
                         jwk-set-uri: https://openid-connect.mocklab.io/.well-known/jwks.json
 
                 registration:
-                    mocklab:
+                    mock-oauth2:
+                        provider: mocklab
                         authorization-grant-type: authorization_code
-#                        scope: openid, profile, email
                         scope: email
                         redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
-                        clientId: mocklab_demo_123
+                        clientId: mocklab_oauth2
+                        clientSecret: whatever
+
+                    mock-oidc:
+                        provider: mocklab
+                        authorization-grant-type: authorization_code
+                        scope: openid, profile, email
+                        redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+                        clientId: mocklab_oidc
                         clientSecret: whatever
 
 spring.mustache.expose-request-attributes: true

@@ -21,8 +21,8 @@ public class OAuth2DemoResource {
         return modelAndView;
     }
 
-    @GetMapping("/openid-connect")
+    @GetMapping("/login")
     public ModelAndView getSsoPage() {
-        return new ModelAndView("openidconnect");
+        return new ModelAndView("login");
     }
 }
