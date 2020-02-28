@@ -1,17 +1,33 @@
 {{#layout}}
 <h1>OAuth2 / OpenID Connect Login Demo</h1>
 
-<p>
-    <a href="/oauth2/authorization/mock-oauth2" class="login-start-button">
-        <img src="/images/oauth-2-logo.png" alt="OAuth2 logo"/>
-        Login with OAuth2
-    </a>
-</p>
+This page showcases MockLab's simulation of a generic OAuth2 / OpenID Connect login provider, hosted at
+<a href="https://openid-connect.mocklab.io" title="MockLab OAuth2 simulation">https://openid-connect.mocklab.io</a>.
 
-<p>
-    <a href="/oauth2/authorization/mock-oidc" class="login-start-button">
-        <img src="/images/openid-icon-100x100.png" alt="OpenID Connect logo" />
-        Login with OpenID Connect
-    </a>
-</p>
+<div style="display: flex; margin-top: 20px">
+    <div class="demo-box">
+        <p>
+            The OAuth2 flow uses the <code>authorization_code</code> grant type and fetches the user profile from the <code>/userinfo</code> endpoint.
+        </p>
+        <p>
+            <a href="/oauth2/authorization/mock-oauth2" class="login-start-button">
+                <img src="/images/oauth-2-logo.png" alt="OAuth2 logo"/>
+                Login with OAuth2
+            </a>
+        </p>
+    </div>
+
+    <div class="demo-box">
+        <p>
+            The OpenID Connect flow also uses the <code>authorization_code</code> grant type and requests an JWT ID token from which
+            the user profile is retrieved.
+        </p>
+        <p>
+            <a href="/oauth2/authorization/mock-oidc" class="login-start-button">
+                <img src="/images/openid-icon-100x100.png" alt="OpenID Connect logo" />
+                Login with OpenID Connect
+            </a>
+        </p>
+    </div>
+</div>
 {{/layout}}
