@@ -29,8 +29,7 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
-      - run: ./gradlew test --stacktrace
-      - run: ./gradlew assemble pushToGithub --stacktrace --debug
+      - run: ./gradlew assemble pushToGithub -x test --stacktrace --debug
       - store_artifacts:
           path: ~/repo/build/reports/tests/test/
 
