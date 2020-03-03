@@ -9,11 +9,11 @@ spring:
             client:
                 provider:
                     mocklab:
-                        authorization-uri: https://openid-connect.mocklab.io/oauth/authorize
-                        token-uri: https://openid-connect.mocklab.io/oauth/token
-                        user-info-uri: https://openid-connect.mocklab.io/userinfo
+                        authorization-uri: https://oauth.mocklab.io/oauth/authorize
+                        token-uri: https://oauth.mocklab.io/oauth/token
+                        user-info-uri: https://oauth.mocklab.io/userinfo
                         user-name-attribute: sub
-                        jwk-set-uri: https://openid-connect.mocklab.io/.well-known/jwks.json
+                        jwk-set-uri: https://oauth.mocklab.io/.well-known/jwks.json
 
                 registration:
                     mock-oauth2:
