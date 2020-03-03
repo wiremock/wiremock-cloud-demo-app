@@ -34,6 +34,7 @@ nav ul {
 
 nav li {
     list-style: none;
+    font-size: 1em;
 }
 
 nav ul li, nav ol li {
@@ -146,10 +147,33 @@ nav ul li, nav ol li {
     cursor: pointer;
 }
 
+.demo-box-container {
+    display: flex;
+    margin-top: 20px
+}
+
 .demo-box {
     border: 1px solid #c1c1c1;
     border-radius: 6px;
     margin-top: 1em;
     margin-right: 3em;
     padding: 1em;
+}
+
+.demo-box p {
+    font-size: 1em;
+}
+
+@media (max-width: 1000px) {
+    body {
+        font-size: 1.5em;
+    }
+
+    .demo-box-container {
+        flex-direction: column;
+    }
+
+    .login-start-button img {
+        height: 70px;
+    }
 }
