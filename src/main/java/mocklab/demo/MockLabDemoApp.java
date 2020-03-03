@@ -27,7 +27,7 @@ public class MockLabDemoApp extends WebSecurityConfigurerAdapter {
                         .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login"))
                 )
                 .logout(l -> l
-                        .logoutSuccessUrl("/").permitAll()
+                        .logoutSuccessUrl("/login").permitAll()
                 )
                 .oauth2Login();
     }
