@@ -9,5 +9,9 @@ tmp*.*
 out/
 build/
 
+**/build/
+**/out/
+**/.gradle/
+
 *.i*
 **/.DS_Store
