@@ -69,10 +69,6 @@ task herokuDeploy(type: HerokuFatJarDeployTask) {
     herokuApp "mocklab-demo"
 }
 
-herokuDeploy.doFirst {
-    assert System.getenv('APP_ENV'), 'You must supply APP_ENV as an environment variable'
-}
-
 task buildAndDeploy {
     dependsOn clean, herokuDeploy, pushToGithub
 }
