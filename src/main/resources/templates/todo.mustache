@@ -107,6 +107,8 @@
 
 
     <form id="new-item-form" name="new-item-form" method="post" action="/todo-items">
+        <input type="hidden" name="{{_csrf.parameterName}}" value="{{_csrf.token}}"/>
+
         <label id="new-item-description-label" for="new-item-description-field">Description</label>
         <input id="new-item-description-field" type="text" name="description" />
 

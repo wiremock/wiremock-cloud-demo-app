@@ -20,7 +20,7 @@ public class MockLabDemoApp extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(a -> a
-                        .antMatchers("/", "/login", "/oauth2/**", "/openid-connect", "/error", "/css/**", "/js/**", "/images/**", "/assets/**").permitAll()
+                        .antMatchers("/", "/login", "/oauth2/**", "/openid-connect", "/todo/**", "/todo-items/**", "/error", "/css/**", "/js/**", "/images/**", "/assets/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(e -> e

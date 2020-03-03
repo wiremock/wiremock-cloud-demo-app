@@ -32,5 +32,3 @@ Ensure Content-Type = application/json
 }
 ```
 
-Stop the running app!
-Delete fault stub then automation demo
