@@ -1,0 +1,68 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx2048m
+      GRADLE_OPTS: -Dorg.gradle.daemon=false
+      TERM: dumb
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "build.gradle" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: ./gradlew dependencies
+
+      - save_cache:
+          paths:
+            - ~/.m2
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+
+      - run: ./gradlew test --stacktrace
+      - run: ./gradlew assemble pushToGithub --stacktrace --debug
+      - store_artifacts:
+          path: ~/repo/build/reports/tests/test/
+
+  deployLive:
+      docker:
+        - image: circleci/openjdk:8-jdk
+
+      environment:
+        APP_ENV: live
+        GRADLE_OPTS: -Dorg.gradle.daemon=false
+
+      steps:
+        - checkout
+        - restore_cache:
+            keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
+        - run: bash .circleci/setup-heroku.sh
+        - run: bash .circleci/setup-git.sh
+        - run: ./gradlew herokuDeploy --stacktrace
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build
+
+      - holdLive:
+          type: approval
+          requires:
+            - build
+
+      - deployLive:
+          requires:
+            - holdLive
