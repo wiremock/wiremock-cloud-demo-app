@@ -16,6 +16,10 @@ spring:
                         jwk-set-uri: https://oauth.mocklab.io/.well-known/jwks.json
 
                 registration:
+                    google:
+                        clientId: 677624187256-vcp2r9ccsjjhu5diej8a89nu1aac4q4j.apps.googleusercontent.com
+                        clientSecret: ${GOOGLE_CLIENT_SECRET}
+
                     mock-oauth2:
                         provider: mocklab
                         authorization-grant-type: authorization_code
