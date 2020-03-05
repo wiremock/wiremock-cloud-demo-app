@@ -4,13 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @SpringBootApplication
 @Controller
@@ -29,7 +28,13 @@ public class MockLabDemoApp extends WebSecurityConfigurerAdapter {
                 .logout(l -> l
                         .logoutSuccessUrl("/login").permitAll()
                 )
-                .oauth2Login();
+                .oauth2Login(customizer -> customizer.successHandler(successHandler()));
+    }
+
+    public AuthenticationSuccessHandler successHandler() {
+        SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
+        handler.setDefaultTargetUrl("/user");
+        return handler;
     }
 
     @GetMapping("/")
