@@ -15,6 +15,12 @@ spring:
                         user-name-attribute: sub
                         jwk-set-uri: https://oauth.mocklab.io/.well-known/jwks.json
 
+                    wiremock:
+                        authorization-uri: http://localhost:8077/oauth/authorize
+                        token-uri: http://localhost:8077/oauth/token
+                        user-info-uri: http://localhost:8077/userinfo
+                        user-name-attribute: sub
+
                 registration:
                     google:
                         clientId: 677624187256-vcp2r9ccsjjhu5diej8a89nu1aac4q4j.apps.googleusercontent.com
@@ -34,6 +40,14 @@ spring:
                         scope: openid, profile, email
                         redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
                         clientId: mocklab_oidc
+                        clientSecret: whatever
+
+                    wiremock:
+                        provider: wiremock
+                        authorization-grant-type: authorization_code
+                        scope: email
+                        redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+                        clientId: wm
                         clientSecret: whatever
 
 spring.mustache.expose-request-attributes: true

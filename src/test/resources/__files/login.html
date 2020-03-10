@@ -1,0 +1,15 @@
+<html>
+<body>
+Welcome to the login page!
+<br />
+<form method="POST" action="/login">
+    <input type="hidden" name="state" value="{{request.query.state}}"/>
+    <input type="hidden" name="redirectUri" value="{{request.query.redirect_uri}}"/>
+
+    <input type="text" name="username" />
+    <input type="password" name="password" />
+
+    <input id="submit" type="submit" value="Login" />
+</form>
+</body>
+</html>
