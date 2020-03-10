@@ -34,7 +34,8 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.seleniumhq.selenium:selenium-api")
     testCompile 'org.seleniumhq.selenium:selenium-chrome-driver'
-    testCompile('com.github.tomakehurst:wiremock:2.26.3')
+    testCompile('com.github.tomakehurst:wiremock-jre8:2.26.3')
+
     testCompile("junit:junit")
     testCompile('org.assertj:assertj-core:3.8.0')
 }

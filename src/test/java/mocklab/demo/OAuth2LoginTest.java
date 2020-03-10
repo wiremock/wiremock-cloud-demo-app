@@ -70,13 +70,11 @@ public class OAuth2LoginTest {
         webDriver.findElement(By.name("password")).sendKeys("pass123");
         webDriver.findElement(By.id("submit")).click();
 
-        Thread.sleep(2000);
-
         assertThat(webDriver.getCurrentUrl()).contains("/user");
         assertThat(webDriver.findElement(By.tagName("h1")).getText()).contains("Hello bwatkins@test.com!");
     }
 
     static {
-        System.setProperty("webdriver.chrome.driver", "lib/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "lib/chromedriver"); // This is the OSX driver. You'll need to tweak this if you want to run on Windows or Linux.
     }
 }
