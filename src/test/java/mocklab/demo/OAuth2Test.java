@@ -20,8 +20,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
-        classes = MockLabDemoApp.class)
-public class OAuth2LoginTest {
+        classes = OAuth2App.class)
+public class OAuth2Test {
 
     static final String APP_BASE_URL = "http://localhost:9000";
 
@@ -69,9 +69,6 @@ public class OAuth2LoginTest {
         webDriver.findElement(By.name("username")).sendKeys("bwatkins@test.com");
         webDriver.findElement(By.name("password")).sendKeys("pass123");
         webDriver.findElement(By.id("submit")).click();
-
-        assertThat(webDriver.getCurrentUrl()).contains("/user");
-        assertThat(webDriver.findElement(By.tagName("h1")).getText()).contains("Hello bwatkins@test.com!");
 
         webDriver.get(APP_BASE_URL + "/api/user");
         assertThat(webDriver.getPageSource()).contains("email\":\"bwatkins@test.com");

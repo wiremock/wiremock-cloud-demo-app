@@ -17,7 +17,7 @@ public class OAuth2DemoResource {
         ModelAndView modelAndView = new ModelAndView("userinfo");
         modelAndView.addObject("user", ImmutableMap.of(
                 "email", user.getAttribute("email"),
-                "id", user.getAttribute("sub")
+                "id",    user.getAttribute("sub")
         ));
 
         return modelAndView;
