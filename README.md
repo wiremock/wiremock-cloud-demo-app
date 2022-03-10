@@ -23,7 +23,7 @@ Linux or Mac OSX:
 ./gradlew bootRun
 ```
 
-The app will start on port 9000 (which can be changed in `application.properties`). Once it is running, point your browser to [http://localhost:9000](http://localhost:9000).
+The app will start on port 7100 (which can be changed in `application.properties`). Once it is running, point your browser to [http://localhost:7100](http://localhost:9000).
 
 
 ## Executing the automated tests

@@ -1,7 +1,7 @@
 spring.main.allow-bean-definition-overriding: true
 
-server.port: 9000
-management.port: 9001
+server.port: 7100
+management.port: 7101
 
 spring:
     security:

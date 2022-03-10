@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MockLabDemoApp extends WebSecurityConfigurerAdapter {
 
+    public static final int DEFAULT_APP_PORT = 7100;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

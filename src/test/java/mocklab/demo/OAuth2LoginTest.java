@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+import static mocklab.demo.MockLabDemoApp.DEFAULT_APP_PORT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -23,7 +24,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
         classes = MockLabDemoApp.class)
 public class OAuth2LoginTest {
 
-    static final String APP_BASE_URL = "http://localhost:9000";
+    static final String APP_BASE_URL = "http://localhost:" + DEFAULT_APP_PORT;
 
     private WebDriver webDriver;
 

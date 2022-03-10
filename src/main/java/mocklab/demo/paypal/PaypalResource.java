@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static mocklab.demo.MockLabDemoApp.DEFAULT_APP_PORT;
+
 @Controller
 public class PaypalResource {
 
@@ -108,8 +110,8 @@ public class PaypalResource {
         payment.setTransactions(transactions);
 
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:9000/cancel");
-        redirectUrls.setReturnUrl("http://localhost:9000/return");
+        redirectUrls.setCancelUrl("http://localhost:" + DEFAULT_APP_PORT + "/cancel");
+        redirectUrls.setReturnUrl("http://localhost:" + DEFAULT_APP_PORT + "/return");
         payment.setRedirectUrls(redirectUrls);
 
         return payment;

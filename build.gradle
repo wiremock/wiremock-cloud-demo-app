@@ -27,17 +27,17 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'org.springframework.boot:spring-boot-starter-mustache'
     compile "org.springframework.boot:spring-boot-devtools"
-    compile 'org.apache.httpcomponents:httpclient:4.5.11'
+    compile 'org.apache.httpcomponents:httpclient:4.5.13'
     compile 'com.paypal.sdk:rest-api-sdk:+'
-    compile "com.google.guava:guava:28.2-jre"
+    compile 'com.google.guava:guava:31.0.1-jre'
 
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.seleniumhq.selenium:selenium-api")
     testCompile 'org.seleniumhq.selenium:selenium-chrome-driver'
-    testCompile('com.github.tomakehurst:wiremock-jre8:2.26.3')
+    testCompile('com.github.tomakehurst:wiremock-jre8:2.32.0')
 
     testCompile("junit:junit")
-    testCompile('org.assertj:assertj-core:3.8.0')
+    testCompile('org.assertj:assertj-core:3.22.0')
 }
 
 dependencyManagement {
