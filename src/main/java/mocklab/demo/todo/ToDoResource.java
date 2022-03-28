@@ -25,7 +25,7 @@ public class ToDoResource {
     @Value("${backend.http.read-timeout}")
     private int readTimeoutMilliseconds;
 
-    @Value("${mockapi.baseurl}")
+    @Value("${todo-api.baseurl}")
     private String baseUrl;
 
     @PostConstruct

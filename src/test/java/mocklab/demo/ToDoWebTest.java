@@ -29,9 +29,6 @@ public class ToDoWebTest {
 
     static final String APP_BASE_URL = "http://localhost:" + DEFAULT_APP_PORT;
 
-    @Value("${mockapi.baseurl}")
-    private String mockApiBaseUrl;
-
     private WebDriver webDriver;
 
     private WireMock mockApi;
