@@ -9,11 +9,11 @@ spring:
             client:
                 provider:
                     mocklab:
-                        authorization-uri: https://oauth.mocklab.io/oauth/authorize
-                        token-uri: https://oauth.mocklab.io/oauth/token
-                        user-info-uri: https://oauth.mocklab.io/userinfo
+                        authorization-uri: https://oauth.wiremockapi.cloud/oauth/authorize
+                        token-uri: https://oauth.wiremockapi.cloud/oauth/token
+                        user-info-uri: https://oauth.wiremockapi.cloud/userinfo
                         user-name-attribute: sub
-                        jwk-set-uri: https://oauth.mocklab.io/.well-known/jwks.json
+                        jwk-set-uri: https://oauth.wiremockapi.cloud/.well-known/jwks.json
 
                     wiremock:
                         authorization-uri: http://localhost:8077/oauth/authorize
@@ -52,10 +52,10 @@ spring:
 
 spring.mustache.expose-request-attributes: true
 
-todo-api.baseurl: http://live-demo.mocklab.io
+todo-api.baseurl: http://live-demo.wiremockapi.cloud
 backend.http.read-timeout: 30000
 
-paypal.endpoint: https://paypal-demo.mocklab.io/
+paypal.endpoint: https://paypal-demo.wiremockapi.cloud/
 #paypal.endpoint: https://api.sandbox.paypal.com/
 
 paypal.client.id: AX7GYdURLc6DOP8d4FZmC8Chduox_EdfVmn_OsoAcgc-FrnrSYD2EFHZebApvq5yQszXc4NhzdXunAD4
