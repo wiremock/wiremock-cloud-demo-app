@@ -8,7 +8,7 @@ spring:
         oauth2:
             client:
                 provider:
-                    mocklab:
+                    wiremock-cloud:
                         authorization-uri: https://oauth.wiremockapi.cloud/oauth/authorize
                         token-uri: https://oauth.wiremockapi.cloud/oauth/token
                         user-info-uri: https://oauth.wiremockapi.cloud/userinfo
@@ -27,19 +27,19 @@ spring:
                         clientSecret: ${GOOGLE_CLIENT_SECRET}
 
                     mock-oauth2:
-                        provider: mocklab
+                        provider: wiremock-cloud
                         authorization-grant-type: authorization_code
                         scope: email
                         redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
-                        clientId: mocklab_oauth2
+                        clientId: wiremock-cloud_oauth2
                         clientSecret: whatever
 
                     mock-oidc:
-                        provider: mocklab
+                        provider: wiremock-cloud
                         authorization-grant-type: authorization_code
                         scope: openid, profile, email
                         redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
-                        clientId: mocklab_oidc
+                        clientId: wiremock-cloud_oidc
                         clientSecret: whatever
 
                     wiremock:
