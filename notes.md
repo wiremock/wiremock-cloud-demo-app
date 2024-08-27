@@ -18,7 +18,7 @@ Ensure Content-Type = application/json
     },
     {
       "id": "4",
-      "description": "Write a MockLab demo app"
+      "description": "Write a WireMock Cloud demo app"
     }
   ]
 }
