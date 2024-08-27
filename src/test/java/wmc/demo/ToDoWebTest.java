@@ -35,7 +35,7 @@ public class ToDoWebTest {
     public void init() {
         mockApi = WireMock.create()
                     .scheme("https")
-                    .host("live-demo.mocklab.io")
+                    .host("live-demo.wiremockapi.cloud")
                     .port(443)
                     .authenticator(new ClientTokenAuthenticator("xxx"))
                     .build();
