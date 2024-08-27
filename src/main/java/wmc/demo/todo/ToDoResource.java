@@ -31,7 +31,7 @@ public class ToDoResource {
     @PostConstruct
     public void init() {
         HttpClient httpClient = HttpClientBuilder.create()
-                .setUserAgent("mocklab-demo-app-1")
+                .setUserAgent("wiremock-cloud-demo-app-1")
                 .build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
         requestFactory.setReadTimeout(readTimeoutMilliseconds);

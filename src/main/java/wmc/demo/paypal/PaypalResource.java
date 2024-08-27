@@ -41,7 +41,7 @@ public class PaypalResource {
     @PostConstruct
     public void init() {
         HttpClient httpClient = HttpClientBuilder.create()
-                .setUserAgent("mocklab-paypal-demo-1")
+                .setUserAgent("wiremock-cloud-paypal-demo-1")
                 .build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
         requestFactory.setReadTimeout(readTimeoutMilliseconds);
