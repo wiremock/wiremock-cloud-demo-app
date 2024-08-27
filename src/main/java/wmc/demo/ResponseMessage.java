@@ -1,4 +1,4 @@
-package mocklab.demo;
+package wmc.demo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

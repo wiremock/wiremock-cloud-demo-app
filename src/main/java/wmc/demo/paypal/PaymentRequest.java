@@ -1,4 +1,4 @@
-package mocklab.demo.paypal;
+package wmc.demo.paypal;
 
 public class PaymentRequest {
 

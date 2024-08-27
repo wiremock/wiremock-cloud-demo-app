@@ -1,4 +1,4 @@
-package mocklab.demo.system;
+package wmc.demo.system;
 
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;

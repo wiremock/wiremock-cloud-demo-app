@@ -1,4 +1,4 @@
-package mocklab.demo.todo;
+package wmc.demo.todo;
 
 public class NewToDoItemForm {
 

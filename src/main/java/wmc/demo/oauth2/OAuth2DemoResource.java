@@ -1,4 +1,4 @@
-package mocklab.demo.oauth2;
+package wmc.demo.oauth2;
 
 import com.google.common.collect.ImmutableMap;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

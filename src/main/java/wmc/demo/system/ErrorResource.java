@@ -1,4 +1,4 @@
-package mocklab.demo.system;
+package wmc.demo.system;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

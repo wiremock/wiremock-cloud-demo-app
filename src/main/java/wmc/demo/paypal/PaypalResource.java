@@ -1,4 +1,4 @@
-package mocklab.demo.paypal;
+package wmc.demo.paypal;
 
 import com.paypal.api.payments.*;
 import com.paypal.base.Constants;
@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static mocklab.demo.MockLabDemoApp.DEFAULT_APP_PORT;
+import static wmc.demo.MockLabDemoApp.DEFAULT_APP_PORT;
 
 @Controller
 public class PaypalResource {
