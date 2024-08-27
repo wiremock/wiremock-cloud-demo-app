@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @SpringBootApplication
 @Controller
-public class MockLabDemoApp extends WebSecurityConfigurerAdapter {
+public class WireMockCloudDemoApp extends WebSecurityConfigurerAdapter {
 
     public static final int DEFAULT_APP_PORT = 7100;
 
@@ -45,7 +45,7 @@ public class MockLabDemoApp extends WebSecurityConfigurerAdapter {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(MockLabDemoApp.class, args);
+        SpringApplication.run(WireMockCloudDemoApp.class, args);
     }
 
 } 

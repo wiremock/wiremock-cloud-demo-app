@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static wmc.demo.MockLabDemoApp.DEFAULT_APP_PORT;
+import static wmc.demo.WireMockCloudDemoApp.DEFAULT_APP_PORT;
 
 @Controller
 public class PaypalResource {

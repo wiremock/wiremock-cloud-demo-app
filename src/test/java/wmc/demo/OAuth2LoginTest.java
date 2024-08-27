@@ -15,13 +15,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
-import static wmc.demo.MockLabDemoApp.DEFAULT_APP_PORT;
+import static wmc.demo.WireMockCloudDemoApp.DEFAULT_APP_PORT;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
-        classes = MockLabDemoApp.class)
+        classes = WireMockCloudDemoApp.class)
 public class OAuth2LoginTest {
 
     static final String APP_BASE_URL = "http://localhost:" + DEFAULT_APP_PORT;
