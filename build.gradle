@@ -67,7 +67,7 @@ task herokuDeploy(type: HerokuFatJarDeployTask) {
     repoOwner 'wiremock'
     repository REPO_NAME
     tagName tag
-    herokuApp "mocklab-demo"
+    herokuApp "wiremock-cloud-demo"
 }
 
 task buildAndDeploy {
