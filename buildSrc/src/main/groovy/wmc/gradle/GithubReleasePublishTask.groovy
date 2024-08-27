@@ -1,4 +1,4 @@
-package mocklab.build
+package wmc.gradle
 
 import org.gradle.api.tasks.TaskAction
 import org.kohsuke.github.GHRelease

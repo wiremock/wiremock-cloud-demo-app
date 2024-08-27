@@ -1,4 +1,4 @@
-package mocklab.build
+package wmc.gradle
 
 import org.gradle.api.DefaultTask
 import org.kohsuke.github.GHRepository

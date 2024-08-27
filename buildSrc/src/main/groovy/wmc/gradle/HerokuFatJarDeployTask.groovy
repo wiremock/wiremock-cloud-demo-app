@@ -1,4 +1,4 @@
-package mocklab.build
+package wmc.gradle
 
 import org.apache.commons.io.IOUtils
 import groovy.transform.Immutable
