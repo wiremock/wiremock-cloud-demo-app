@@ -8,7 +8,7 @@ plugins {
     id "net.foragerr.jmeter" version "1.1.0-4.0"
 }
 
-group = 'io.mocklab'
+group = 'io.wiremock'
 version =  '1'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -47,24 +47,24 @@ dependencyManagement {
 }
 
 bootJar {
-    archiveName = 'mocklab-demo-app.jar'
+    archiveName = 'wiremock-cloud-demo-app.jar'
 }
 
 
 def tag = System.getenv('CIRCLE_SHA1') ? "circle-${System.getenv('CIRCLE_BRANCH')}-${System.getenv('CIRCLE_SHA1')}" :
     (System.getenv('TAG') ?: "${InetAddress.localHost.hostName}-${System.currentTimeMillis()}")
 
-def REPO_NAME = 'mocklab-demo-app'
+def REPO_NAME = 'wiremock-cloud-demo-app'
 
 task pushToGithub(type: GithubReleasePublishTask) {
-    repoOwner 'mocklab'
+    repoOwner 'wiremock'
     repository REPO_NAME
     tagName tag
-    attachmentFilePath "${project.buildDir}/libs/mocklab-demo-app.jar"
+    attachmentFilePath "${project.buildDir}/libs/wiremock-cloud-demo-app.jar"
 }
 
 task herokuDeploy(type: HerokuFatJarDeployTask) {
-    repoOwner 'mocklab'
+    repoOwner 'wiremock'
     repository REPO_NAME
     tagName tag
     herokuApp "mocklab-demo"
